@@ -9,7 +9,7 @@ export function AuthCard() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       whileHover={{ scale: 1.01 }}
-      className="w-full max-w-md"
+      className="mx-auto w-full max-w-md"
     >
       <div className="rounded-2xl bg-white/90 p-8 shadow-xl shadow-slate-900/10 ring-1 ring-slate-200 backdrop-blur">
         <div className="mb-6">
