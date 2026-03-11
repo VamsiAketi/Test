@@ -10,8 +10,8 @@ function Icon({ d }: { d: string }) {
 
 export function Sidebar() {
   return (
-    <aside className="hidden w-[260px] shrink-0 border-r border-slate-200 bg-white lg:block">
-      <div className="flex h-full flex-col">
+    <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 overflow-y-auto border-r border-slate-200 bg-white lg:block">
+      <div className="flex min-h-full flex-col">
         <div className="flex items-center gap-3 px-5 py-5">
           <div className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-600 text-white shadow-sm">
             <Icon d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" />

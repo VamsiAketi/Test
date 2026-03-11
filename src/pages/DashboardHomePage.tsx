@@ -47,9 +47,9 @@ const enrollmentTrend = [
 ];
 
 const trialStatus = [
-  { name: "Active", value: 12, color: "#2563EB" },
-  { name: "Pending", value: 4, color: "#0EA5E9" },
-  { name: "Completed", value: 7, color: "#10B981" },
+  { name: "Active", value: 12, color: "#1D4ED8" },
+  { name: "Pending", value: 4, color: "#0284C7" },
+  { name: "Completed", value: 7, color: "#059669" },
 ];
 
 const sitesPerformance = [
@@ -83,7 +83,7 @@ export function DashboardHomePage() {
                     contentStyle={{ borderRadius: 12, borderColor: "#E2E8F0" }}
                     labelStyle={{ color: "#0F172A" }}
                   />
-                  <Line type="monotone" dataKey="enrolled" stroke="#2563EB" strokeWidth={3} dot={false} />
+                  <Line type="monotone" dataKey="enrolled" stroke="#1D4ED8" strokeWidth={3} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -168,7 +168,7 @@ export function DashboardHomePage() {
                   <XAxis dataKey="site" tickLine={false} axisLine={{ stroke: "#CBD5E1" }} />
                   <YAxis tickLine={false} axisLine={{ stroke: "#CBD5E1" }} width={44} />
                   <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#E2E8F0" }} />
-                  <Bar dataKey="enrollments" radius={[10, 10, 10, 10]} fill="#0EA5E9" />
+                  <Bar dataKey="enrollments" radius={[10, 10, 10, 10]} fill="#0284C7" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

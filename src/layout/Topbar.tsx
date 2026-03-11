@@ -17,7 +17,7 @@ function BellIcon() {
 
 export function Topbar({ title }: { title: string }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <div className="min-w-0">
           <h1 className="truncate text-lg font-semibold tracking-tight text-slate-900">{title}</h1>
@@ -48,7 +48,7 @@ export function Topbar({ title }: { title: string }) {
             whileHover={{ scale: 1.02 }}
             className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm transition hover:bg-slate-50"
           >
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blue-600 to-sky-400 text-xs font-bold text-white">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blue-700 to-sky-500 text-xs font-bold text-white">
               CT
             </span>
             <div className="hidden text-left sm:block">
