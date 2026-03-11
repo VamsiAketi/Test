@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
@@ -57,6 +59,22 @@ const trialStatus = [
   { name: "Completed", value: 7, color: "#22C55E" },
 ];
 
+const siteEnrollments = [
+  { site: "Boston", enrollments: 142 },
+  { site: "NYC", enrollments: 121 },
+  { site: "Austin", enrollments: 98 },
+  { site: "Seattle", enrollments: 76 },
+  { site: "Chicago", enrollments: 63 },
+];
+
+const reviewTurnaround = [
+  { week: "W1", days: 4.6 },
+  { week: "W2", days: 4.1 },
+  { week: "W3", days: 3.8 },
+  { week: "W4", days: 3.6 },
+  { week: "W5", days: 3.4 },
+];
+
 export function DashboardGrid() {
   return (
     <div className="h-full">
@@ -79,7 +97,7 @@ export function DashboardGrid() {
         </div>
 
         {/* Row 2: charts */}
-        <div className="col-span-12 min-h-0 xl:col-span-8">
+        <div className="col-span-12 min-h-0 xl:col-span-6">
           <Card title="Patient Enrollment Trend">
             <div className="h-full min-h-[220px] w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -98,7 +116,7 @@ export function DashboardGrid() {
           </Card>
         </div>
 
-        <div className="col-span-12 min-h-0 xl:col-span-4">
+        <div className="col-span-12 min-h-0 xl:col-span-6">
           <Card title="Trial Status Distribution">
             <div className="h-full min-h-[220px] w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -133,58 +151,35 @@ export function DashboardGrid() {
           </Card>
         </div>
 
-        {/* Row 3: table + activity */}
-        <div className="col-span-12 min-h-0 xl:col-span-8">
-          <Card title="Recent Clinical Trials">
-            <div className="overflow-hidden rounded-lg ring-1 ring-slate-700/40">
-              <table className="min-w-full text-left text-sm">
-                <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-600 dark:bg-slate-900/40 dark:text-slate-300">
-                  <tr>
-                    <th className="px-3 py-2">Trial</th>
-                    <th className="px-3 py-2">Phase</th>
-                    <th className="px-3 py-2">Status</th>
-                    <th className="px-3 py-2 text-right">Enrollment</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50">
-                  {[1, 2, 3, 4].map((i) => (
-                    <tr key={i} className="text-slate-800 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900/30">
-                      <td className="px-3 py-2 font-semibold">CT-{2400 + i} • Cardiology Study</td>
-                      <td className="px-3 py-2">Phase {i % 3 === 0 ? "III" : "II"}</td>
-                      <td className="px-3 py-2">
-                        <span className="inline-flex rounded-full bg-emerald-400/10 px-2 py-1 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-400/20">
-                          Active
-                        </span>
-                      </td>
-                      <td className="px-3 py-2 text-right">{120 + i * 8}/200</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        {/* Row 3: analytics charts (fits on one screen) */}
+        <div className="col-span-12 min-h-0 xl:col-span-6">
+          <Card title="Enrollments by Site">
+            <div className="h-full min-h-[220px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={siteEnrollments} margin={{ left: 6, right: 10, top: 10, bottom: 0 }}>
+                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+                  <XAxis dataKey="site" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
+                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={44} />
+                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
+                  <Bar dataKey="enrollments" radius={[10, 10, 0, 0]} fill="#38BDF8" />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </Card>
         </div>
 
-        <div className="col-span-12 min-h-0 xl:col-span-4">
-          <Card title="Recent Activity">
-            <div className="space-y-3">
-              {[
-                { t: "Consent form updated", d: "CT-2403 • Documents" },
-                { t: "Site onboarding started", d: "Boston General" },
-                { t: "Enrollment milestone reached", d: "1,250 patients" },
-                { t: "Report generated", d: "Safety summary" },
-              ].map((a, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-3 rounded-lg bg-slate-50 px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-700/40"
-                >
-                  <div className="mt-1 h-2 w-2 rounded-full bg-blue-400" />
-                  <div className="min-w-0">
-                    <div className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">{a.t}</div>
-                    <div className="truncate text-xs text-slate-500 dark:text-slate-400">{a.d}</div>
-                  </div>
-                </div>
-              ))}
+        <div className="col-span-12 min-h-0 xl:col-span-6">
+          <Card title="Avg Review Turnaround (days)">
+            <div className="h-full min-h-[220px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={reviewTurnaround} margin={{ left: 8, right: 14, top: 10, bottom: 0 }}>
+                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
+                  <XAxis dataKey="week" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
+                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={44} />
+                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
+                  <Area type="monotone" dataKey="days" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.18} strokeWidth={2.5} />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
           </Card>
         </div>
