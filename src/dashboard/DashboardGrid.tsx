@@ -16,10 +16,10 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   return (
     <motion.section
       whileHover={{ y: -1 }}
-      className="min-h-0 rounded-xl bg-slate-800/80 p-4 shadow-sm ring-1 ring-slate-700/60"
+      className="min-h-0 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800/80 dark:ring-slate-700/60"
     >
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-100">{title}</h2>
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{title}</h2>
       </div>
       <div className="min-h-0">{children}</div>
     </motion.section>
@@ -35,8 +35,8 @@ function Stat({ label, value, tone }: { label: string; value: string; tone: "pri
         : "text-amber-300";
 
   return (
-    <div className="rounded-xl bg-slate-800/80 p-4 ring-1 ring-slate-700/60">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</div>
+    <div className="rounded-xl bg-white p-4 ring-1 ring-slate-200 dark:bg-slate-800/80 dark:ring-slate-700/60">
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
       <div className={`mt-2 text-2xl font-semibold ${toneClass}`}>{value}</div>
       <div className="mt-1 text-xs text-slate-500">Demo data</div>
     </div>
@@ -120,13 +120,13 @@ export function DashboardGrid() {
               {trialStatus.map((s) => (
                 <div
                   key={s.name}
-                  className="flex items-center justify-between rounded-lg bg-slate-900/40 px-3 py-2 ring-1 ring-slate-700/40"
+                  className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-700/40"
                 >
-                  <div className="flex items-center gap-2 text-slate-200">
+                  <div className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
                     <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: s.color }} />
                     {s.name}
                   </div>
-                  <div className="font-semibold text-slate-100">{s.value}</div>
+                  <div className="font-semibold text-slate-900 dark:text-slate-100">{s.value}</div>
                 </div>
               ))}
             </div>
@@ -138,7 +138,7 @@ export function DashboardGrid() {
           <Card title="Recent Clinical Trials">
             <div className="overflow-hidden rounded-lg ring-1 ring-slate-700/40">
               <table className="min-w-full text-left text-sm">
-                <thead className="bg-slate-900/40 text-xs uppercase tracking-wide text-slate-300">
+                <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-600 dark:bg-slate-900/40 dark:text-slate-300">
                   <tr>
                     <th className="px-3 py-2">Trial</th>
                     <th className="px-3 py-2">Phase</th>
@@ -146,9 +146,9 @@ export function DashboardGrid() {
                     <th className="px-3 py-2 text-right">Enrollment</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700/50">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50">
                   {[1, 2, 3, 4].map((i) => (
-                    <tr key={i} className="text-slate-200 hover:bg-slate-900/30">
+                    <tr key={i} className="text-slate-800 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-900/30">
                       <td className="px-3 py-2 font-semibold">CT-{2400 + i} • Cardiology Study</td>
                       <td className="px-3 py-2">Phase {i % 3 === 0 ? "III" : "II"}</td>
                       <td className="px-3 py-2">
@@ -176,12 +176,12 @@ export function DashboardGrid() {
               ].map((a, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 rounded-lg bg-slate-900/40 px-3 py-2 ring-1 ring-slate-700/40"
+                  className="flex items-start gap-3 rounded-lg bg-slate-50 px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-700/40"
                 >
                   <div className="mt-1 h-2 w-2 rounded-full bg-blue-400" />
                   <div className="min-w-0">
-                    <div className="truncate text-sm font-semibold text-slate-100">{a.t}</div>
-                    <div className="truncate text-xs text-slate-400">{a.d}</div>
+                    <div className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">{a.t}</div>
+                    <div className="truncate text-xs text-slate-500 dark:text-slate-400">{a.d}</div>
                   </div>
                 </div>
               ))}

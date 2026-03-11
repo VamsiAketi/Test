@@ -21,7 +21,7 @@ export function DashboardLayout() {
   const title = titleFromPath(location.pathname);
 
   return (
-    <div className="h-screen overflow-hidden bg-slate-900 text-slate-100">
+    <div className="h-screen overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
       <div className="flex h-screen">
         <Sidebar />
 

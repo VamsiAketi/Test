@@ -10,15 +10,15 @@ function Icon({ d }: { d: string }) {
 
 export function Sidebar() {
   return (
-    <aside className="sticky top-0 hidden h-screen w-[240px] shrink-0 border-r border-slate-800 bg-slate-950 lg:block">
+    <aside className="sticky top-0 hidden h-screen w-[240px] shrink-0 border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 lg:block">
       <div className="flex h-full flex-col">
         <div className="flex items-center gap-3 px-5 py-5">
           <div className="grid h-10 w-10 place-items-center rounded-2xl bg-blue-600/90 text-white shadow-sm ring-1 ring-blue-500/30">
             <Icon d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" />
           </div>
           <div>
-            <div className="text-base font-semibold leading-tight text-slate-100">ClinTrust</div>
-            <div className="text-xs text-slate-400">Clinical Trial Management</div>
+            <div className="text-base font-semibold leading-tight text-slate-900 dark:text-slate-100">ClinTrust</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Clinical Trial Management</div>
           </div>
         </div>
 
@@ -32,10 +32,10 @@ export function Sidebar() {
           <SidebarItem to="/app/settings" label="Settings" icon={<Icon d="M12 15.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7zM19.4 15a7.8 7.8 0 0 0 .1-1 7.8 7.8 0 0 0-.1-1l2-1.5-2-3.5-2.3.8a7.7 7.7 0 0 0-1.7-1l-.3-2.4H11l-.3 2.4a7.7 7.7 0 0 0-1.7 1L6.7 7l-2 3.5L6.7 12a7.8 7.8 0 0 0-.1 1 7.8 7.8 0 0 0 .1 1L4.7 16.5l2 3.5 2.3-.8c.5.4 1.1.7 1.7 1l.3 2.4h4l.3-2.4c.6-.3 1.2-.6 1.7-1l2.3.8 2-3.5L19.4 15z" />} />
         </nav>
 
-        <div className="border-t border-slate-800 p-4">
-          <div className="rounded-xl bg-slate-900/40 p-4 text-xs text-slate-300 ring-1 ring-slate-700/50">
-            <div className="font-semibold text-slate-100">Tip</div>
-            <div className="mt-1 text-slate-300">This is a demo dashboard shell. Wire in APIs and auth when ready.</div>
+        <div className="border-t border-slate-200 p-4 dark:border-slate-800">
+          <div className="rounded-xl bg-slate-50 p-4 text-xs text-slate-600 ring-1 ring-slate-100 dark:bg-slate-900/40 dark:text-slate-300 dark:ring-slate-700/50">
+            <div className="font-semibold text-slate-800 dark:text-slate-100">Tip</div>
+            <div className="mt-1">This is a demo dashboard shell. Wire in APIs and auth when ready.</div>
           </div>
         </div>
       </div>
