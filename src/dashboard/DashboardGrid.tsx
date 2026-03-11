@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import {
-  Area,
-  AreaChart,
+
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
   Line,
   LineChart,
+  Pie,
+  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -67,12 +68,10 @@ const siteEnrollments = [
   { site: "Chicago", enrollments: 63 },
 ];
 
-const reviewTurnaround = [
-  { week: "W1", days: 4.6 },
-  { week: "W2", days: 4.1 },
-  { week: "W3", days: 3.8 },
-  { week: "W4", days: 3.6 },
-  { week: "W5", days: 3.4 },
+const patientPipeline = [
+  { name: "Screened", value: 1620, color: "#38BDF8" },
+  { name: "Eligible", value: 1394, color: "#2563EB" },
+  { name: "Enrolled", value: 1284, color: "#22C55E" },
 ];
 
 export function DashboardGrid() {
@@ -120,17 +119,14 @@ export function DashboardGrid() {
           <Card title="Trial Status Distribution">
             <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={trialStatus} margin={{ left: 6, right: 10, top: 10, bottom: 0 }}>
-                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
-                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={36} />
+                <PieChart>
                   <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
-                  <Bar dataKey="value" radius={[10, 10, 0, 0]}>
+                  <Pie data={trialStatus} dataKey="value" nameKey="name" innerRadius={60} outerRadius={92} paddingAngle={2}>
                     {trialStatus.map((entry) => (
                       <Cell key={entry.name} fill={entry.color} />
                     ))}
-                  </Bar>
-                </BarChart>
+                  </Pie>
+                </PieChart>
               </ResponsiveContainer>
             </div>
 
@@ -169,16 +165,17 @@ export function DashboardGrid() {
         </div>
 
         <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
-          <Card title="Avg Review Turnaround (days)">
+          <Card title="Patient Pipeline">
             <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={reviewTurnaround} margin={{ left: 8, right: 14, top: 10, bottom: 0 }}>
-                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                  <XAxis dataKey="week" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
-                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={44} />
+                <PieChart>
                   <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
-                  <Area type="monotone" dataKey="days" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.18} strokeWidth={2.5} />
-                </AreaChart>
+                  <Pie data={patientPipeline} dataKey="value" nameKey="name" outerRadius={92} paddingAngle={2}>
+                    {patientPipeline.map((entry) => (
+                      <Cell key={entry.name} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
               </ResponsiveContainer>
             </div>
           </Card>

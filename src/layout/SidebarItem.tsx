@@ -33,7 +33,7 @@ export function SidebarItem({ to, icon, label }: { to: string; icon: ReactNode; 
           {isActive ? (
             <motion.span
               layoutId="sidebar-active"
-              className="absolute inset-0 -z-10 rounded-xl bg-blue-50"
+              className="absolute inset-0 -z-10 rounded-xl bg-blue-50 dark:bg-blue-500/10"
               transition={{ type: "spring", stiffness: 380, damping: 30 }}
             />
           ) : null}
