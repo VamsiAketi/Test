@@ -80,7 +80,7 @@ export function LeftBrandPanel() {
 
         <div className="max-w-sm">
           <h2 className="text-3xl font-semibold leading-tight tracking-tight">
-            Calm, secure access to your clinical trial workspace.
+            Secure access to your clinical trial workspace.
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-white/85">
             Track trials, manage participants, and review patient data with a modern interface designed for clarity and

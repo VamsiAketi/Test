@@ -27,7 +27,7 @@ export function LoginPage() {
             <AuthCard />
 
             <p className="mx-auto mt-8 max-w-md text-center text-xs text-slate-500">
-              For demo UI only — wire this to your auth provider when ready.
+              {/* For demo UI only — wire this to your auth provider when ready. */}
             </p>
           </div>
         </div>

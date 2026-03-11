@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import {
-
   Bar,
   BarChart,
   CartesianGrid,
@@ -19,32 +18,49 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   return (
     <motion.section
       whileHover={{ y: -1 }}
-      className="min-h-0 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-200 dark:bg-slate-800/80 dark:ring-slate-700/60"
+      className="h-full rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-200 flex flex-col"
     >
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{title}</h2>
+      <div className="mb-2 flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
       </div>
-      <div className="min-h-0">{children}</div>
+
+      <div className="flex-1 min-h-0">{children}</div>
     </motion.section>
   );
 }
 
-function Stat({ label, value, tone }: { label: string; value: string; tone: "primary" | "success" | "warning" }) {
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone: "primary" | "success" | "warning";
+}) {
   const toneClass =
     tone === "primary"
-      ? "text-blue-300"
+      ? "text-blue-500"
       : tone === "success"
-        ? "text-emerald-300"
-        : "text-amber-300";
+      ? "text-emerald-500"
+      : "text-amber-500";
 
   return (
-    <div className="rounded-xl bg-white p-4 ring-1 ring-slate-200 dark:bg-slate-800/80 dark:ring-slate-700/60">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
-      <div className={`mt-2 text-2xl font-semibold ${toneClass}`}>{value}</div>
-      <div className="mt-1 text-xs text-slate-500">Demo data</div>
+    <div className="rounded-xl bg-white p-4 ring-1 ring-slate-200">
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+        {label}
+      </div>
+
+      <div className={`mt-1 text-2xl font-semibold ${toneClass}`}>
+        {value}
+      </div>
+
+      <div className="text-xs text-slate-400">Demo data</div>
     </div>
   );
 }
+
+/* DATA */
 
 const enrollmentTrend = [
   { week: "W1", enrolled: 1188 },
@@ -56,8 +72,8 @@ const enrollmentTrend = [
 
 const trialStatus = [
   { name: "Active", value: 12, color: "#2563EB" },
-  { name: "Pending", value: 4, color: "#38BDF8" },
-  { name: "Completed", value: 7, color: "#22C55E" },
+  { name: "Pending", value: 4, color: "#F59E0B" },
+  { name: "Completed", value: 7, color: "#10B981" },
 ];
 
 const siteEnrollments = [
@@ -69,117 +85,139 @@ const siteEnrollments = [
 ];
 
 const patientPipeline = [
-  { name: "Screened", value: 1620, color: "#38BDF8" },
-  { name: "Eligible", value: 1394, color: "#2563EB" },
-  { name: "Enrolled", value: 1284, color: "#22C55E" },
+  { name: "Screened", value: 1620, color: "#8B5CF6" },
+  { name: "Eligible", value: 1394, color: "#EC4899" },
+  { name: "Enrolled", value: 1284, color: "#14B8A6" },
 ];
+
+/* Label showing NAME + % */
+
+const renderLabel = ({ name, percent }: any) =>
+  `${name} ${(percent * 100).toFixed(0)}%`;
 
 export function DashboardGrid() {
   return (
-    <div className="h-full">
-      {/* 12-col, 3-row control-center grid (no page scroll) */}
+    <div className="h-full overflow-hidden p-4">
+
       <div className="grid h-full min-h-0 grid-cols-12 grid-rows-[auto_1fr_1fr] gap-4">
-        {/* Row 1: stats cards */}
+
+        {/* STATS */}
         <div className="col-span-12 grid grid-cols-12 gap-4">
-          <div className="col-span-12 sm:col-span-6 xl:col-span-3">
+          <div className="col-span-6 xl:col-span-3">
             <Stat label="Active Trials" value="12" tone="primary" />
           </div>
-          <div className="col-span-12 sm:col-span-6 xl:col-span-3">
+
+          <div className="col-span-6 xl:col-span-3">
             <Stat label="Total Patients" value="1,284" tone="success" />
           </div>
-          <div className="col-span-12 sm:col-span-6 xl:col-span-3">
+
+          <div className="col-span-6 xl:col-span-3">
             <Stat label="Active Study Sites" value="27" tone="primary" />
           </div>
-          <div className="col-span-12 sm:col-span-6 xl:col-span-3">
+
+          <div className="col-span-6 xl:col-span-3">
             <Stat label="Pending Reviews" value="18" tone="warning" />
           </div>
         </div>
 
-        {/* Row 2: charts */}
-        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
-          <Card title="Patient Enrollment Trend">
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={enrollmentTrend} margin={{ left: 8, right: 14, top: 10, bottom: 0 }}>
-                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                  <XAxis dataKey="week" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
-                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={44} />
-                  <Tooltip
-                    contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }}
-                    labelStyle={{ color: "#E2E8F0" }}
-                  />
-                  <Line type="monotone" dataKey="enrolled" stroke="#2563EB" strokeWidth={3} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </Card>
-        </div>
+        {/* ROW 2 */}
 
-        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
+        {/* DONUT */}
+        <div className="col-span-4 min-h-0">
           <Card title="Trial Status Distribution">
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
-                  <Pie data={trialStatus} dataKey="value" nameKey="name" innerRadius={60} outerRadius={92} paddingAngle={2}>
-                    {trialStatus.map((entry) => (
-                      <Cell key={entry.name} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Tooltip />
 
-            <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-              {trialStatus.map((s) => (
-                <div
-                  key={s.name}
-                  className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-700/40"
+                <Pie
+                  data={trialStatus}
+                  dataKey="value"
+                  innerRadius={30}
+                  outerRadius={45}
+                  paddingAngle={3}
+                  label={renderLabel}
                 >
-                  <div className="flex items-center gap-2 text-slate-700 dark:text-slate-200">
-                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: s.color }} />
-                    {s.name}
-                  </div>
-                  <div className="font-semibold text-slate-900 dark:text-slate-100">{s.value}</div>
-                </div>
-              ))}
-            </div>
+                  {trialStatus.map((entry) => (
+                    <Cell key={entry.name} fill={entry.color} />
+                  ))}
+                </Pie>
+
+              </PieChart>
+            </ResponsiveContainer>
           </Card>
         </div>
 
-        {/* Row 3: analytics charts (fits on one screen) */}
-        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
+        {/* LINE */}
+        <div className="col-span-8 min-h-0">
+          <Card title="Patient Enrollment Trend">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={enrollmentTrend}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="week" />
+                <YAxis />
+                <Tooltip />
+
+                <Line
+                  type="monotone"
+                  dataKey="enrolled"
+                  stroke="#2563EB"
+                  strokeWidth={2}
+                  dot={false}
+                />
+
+              </LineChart>
+            </ResponsiveContainer>
+          </Card>
+        </div>
+
+        {/* ROW 3 */}
+
+        {/* BAR */}
+        <div className="col-span-8 min-h-0">
           <Card title="Enrollments by Site">
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={siteEnrollments} margin={{ left: 6, right: 10, top: 10, bottom: 0 }}>
-                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
-                  <XAxis dataKey="site" tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} />
-                  <YAxis tickLine={false} axisLine={{ stroke: "#334155" }} tick={{ fill: "#94A3B8" }} width={44} />
-                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
-                  <Bar dataKey="enrollments" radius={[10, 10, 0, 0]} fill="#38BDF8" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={siteEnrollments}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="site" />
+                <YAxis />
+                <Tooltip />
+
+                <Bar
+                  dataKey="enrollments"
+                  fill="#38BDF8"
+                  radius={[6, 6, 0, 0]}
+                  barSize={20}
+                />
+
+              </BarChart>
+            </ResponsiveContainer>
           </Card>
         </div>
 
-        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
+        {/* PIE */}
+        <div className="col-span-4 min-h-0">
           <Card title="Patient Pipeline">
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: "#334155", backgroundColor: "#0F172A" }} />
-                  <Pie data={patientPipeline} dataKey="value" nameKey="name" outerRadius={92} paddingAngle={2}>
-                    {patientPipeline.map((entry) => (
-                      <Cell key={entry.name} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Tooltip />
+
+                <Pie
+                  data={patientPipeline}
+                  dataKey="value"
+                  outerRadius={55}
+                  paddingAngle={3}
+                  label={renderLabel}
+                >
+                  {patientPipeline.map((entry) => (
+                    <Cell key={entry.name} fill={entry.color} />
+                  ))}
+                </Pie>
+
+              </PieChart>
+            </ResponsiveContainer>
           </Card>
         </div>
+
       </div>
     </div>
   );
