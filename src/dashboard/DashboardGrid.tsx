@@ -97,9 +97,9 @@ export function DashboardGrid() {
         </div>
 
         {/* Row 2: charts */}
-        <div className="col-span-12 min-h-0 xl:col-span-6">
+        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
           <Card title="Patient Enrollment Trend">
-            <div className="h-full min-h-[220px] w-full">
+            <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={enrollmentTrend} margin={{ left: 8, right: 14, top: 10, bottom: 0 }}>
                   <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
@@ -116,9 +116,9 @@ export function DashboardGrid() {
           </Card>
         </div>
 
-        <div className="col-span-12 min-h-0 xl:col-span-6">
+        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
           <Card title="Trial Status Distribution">
-            <div className="h-full min-h-[220px] w-full">
+            <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={trialStatus} margin={{ left: 6, right: 10, top: 10, bottom: 0 }}>
                   <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
@@ -152,9 +152,9 @@ export function DashboardGrid() {
         </div>
 
         {/* Row 3: analytics charts (fits on one screen) */}
-        <div className="col-span-12 min-h-0 xl:col-span-6">
+        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
           <Card title="Enrollments by Site">
-            <div className="h-full min-h-[220px] w-full">
+            <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={siteEnrollments} margin={{ left: 6, right: 10, top: 10, bottom: 0 }}>
                   <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
@@ -168,9 +168,9 @@ export function DashboardGrid() {
           </Card>
         </div>
 
-        <div className="col-span-12 min-h-0 xl:col-span-6">
+        <div className="col-span-12 min-h-0 min-w-0 xl:col-span-6">
           <Card title="Avg Review Turnaround (days)">
-            <div className="h-full min-h-[220px] w-full">
+            <div className="h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={reviewTurnaround} margin={{ left: 8, right: 14, top: 10, bottom: 0 }}>
                   <CartesianGrid stroke="#334155" strokeDasharray="3 3" />
