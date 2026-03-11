@@ -21,15 +21,15 @@ export function DashboardLayout() {
   const title = titleFromPath(location.pathname);
 
   return (
-    <div className="h-screen overflow-hidden bg-slate-50 text-slate-900">
+    <div className="h-screen overflow-hidden bg-slate-900 text-slate-100">
       <div className="flex h-screen">
         <Sidebar />
 
         <div className="flex min-w-0 flex-1 flex-col">
           <Topbar title={title} />
 
-          {/* Only the content area scrolls; sidebar + topbar stay static */}
-          <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {/* Fixed fullscreen dashboard: no page-level vertical scroll */}
+          <main className="flex-1 overflow-hidden p-4 sm:p-6 lg:p-6">
             <Outlet />
           </main>
         </div>

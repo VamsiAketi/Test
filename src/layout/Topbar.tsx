@@ -17,11 +17,11 @@ function BellIcon() {
 
 export function Topbar({ title }: { title: string }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-900/80 backdrop-blur">
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <div className="min-w-0">
-          <h1 className="truncate text-lg font-semibold tracking-tight text-slate-900">{title}</h1>
-          <p className="mt-0.5 hidden text-xs text-slate-500 sm:block">
+          <h1 className="truncate text-lg font-semibold tracking-tight text-slate-100">{title}</h1>
+          <p className="mt-0.5 hidden text-xs text-slate-400 sm:block">
             Calm, readable UI for medical staff — ready to connect to real trial data.
           </p>
         </div>
@@ -32,13 +32,13 @@ export function Topbar({ title }: { title: string }) {
               <span className="sr-only">Search</span>
               <input
                 placeholder="Search trials, patients, sites…"
-                className="w-[320px] rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100"
+                className="w-[320px] rounded-xl border border-slate-700 bg-slate-950/40 px-4 py-2.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20"
               />
             </label>
           </div>
 
           <button
-            className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-slate-700 bg-slate-900/40 text-slate-200 shadow-sm transition hover:bg-slate-900/70"
             aria-label="Notifications"
           >
             <BellIcon />
@@ -46,14 +46,14 @@ export function Topbar({ title }: { title: string }) {
 
           <motion.button
             whileHover={{ scale: 1.02 }}
-            className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm transition hover:bg-slate-50"
+            className="flex items-center gap-3 rounded-xl border border-slate-700 bg-slate-900/40 px-3 py-2 shadow-sm transition hover:bg-slate-900/70"
           >
             <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blue-700 to-sky-500 text-xs font-bold text-white">
               CT
             </span>
             <div className="hidden text-left sm:block">
-              <div className="text-sm font-semibold leading-tight">Dr. Patel</div>
-              <div className="text-xs text-slate-500">Trial Coordinator</div>
+              <div className="text-sm font-semibold leading-tight text-slate-100">Dr. Patel</div>
+              <div className="text-xs text-slate-400">Trial Coordinator</div>
             </div>
           </motion.button>
         </div>
