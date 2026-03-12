@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 import { useTheme } from "../theme/useTheme";
 
 function BellIcon() {
@@ -46,6 +48,8 @@ function ThemeIcon({ mode }: { mode: "light" | "dark" }) {
 
 export function Topbar({ title }: { title: string }) {
   const { theme, toggle } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
@@ -86,19 +90,31 @@ export function Topbar({ title }: { title: string }) {
             <BellIcon />
           </button>
 
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.02 }}
-            className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40 dark:hover:bg-slate-900/70"
-            type="button"
+            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40 dark:hover:bg-slate-900/70"
           >
             <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-blue-700 to-sky-500 text-xs font-bold text-white">
               CT
             </span>
             <div className="hidden text-left sm:block">
-              <div className="text-sm font-semibold leading-tight text-slate-900 dark:text-slate-100">Dr. Patel</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400">Trial Coordinator</div>
+              <div className="text-sm font-semibold leading-tight text-slate-900 dark:text-slate-100">
+                {user?.email ?? "Unknown user"}
+              </div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">{user?.role ?? ""}</div>
             </div>
-          </motion.button>
+
+            <button
+              type="button"
+              className="ml-2 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-200 dark:hover:bg-slate-900/70"
+              onClick={async () => {
+                await logout();
+                navigate("/login", { replace: true });
+              }}
+            >
+              Logout
+            </button>
+          </motion.div>
         </div>
       </div>
     </header>

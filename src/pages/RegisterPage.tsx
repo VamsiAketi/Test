@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { AuthCard } from "../components/AuthCard";
 import { LeftBrandPanel } from "../components/LeftBrandPanel";
 
-export function LoginPage() {
+export function RegisterPage() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,15 +16,8 @@ export function LoginPage() {
         <div className="relative flex items-center justify-center px-6 py-12">
           <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50 to-blue-50" />
 
-          <motion.div
-            aria-hidden
-            className="pointer-events-none absolute -top-24 right-10 h-56 w-56 rounded-full bg-blue-200/40 blur-3xl"
-            animate={{ y: [0, 14, 0], x: [0, -10, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          />
-
           <div className="relative w-full">
-            <AuthCard mode="login" />
+            <AuthCard mode="register" />
           </div>
         </div>
       </div>

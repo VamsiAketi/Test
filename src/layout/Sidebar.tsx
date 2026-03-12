@@ -1,3 +1,4 @@
+import { useAuth } from "../auth/AuthContext";
 import { SidebarItem } from "./SidebarItem";
 
 function Icon({ d }: { d: string }) {
@@ -9,6 +10,9 @@ function Icon({ d }: { d: string }) {
 }
 
 export function Sidebar() {
+  const { hasRole } = useAuth();
+  const canSeeSettings = hasRole(["Admin", "Manager"]);
+
   return (
     <aside className="sticky top-0 hidden h-screen w-[240px] shrink-0 border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 lg:block">
       <div className="flex h-full flex-col">
@@ -29,7 +33,13 @@ export function Sidebar() {
           <SidebarItem to="/app/sites" label="Sites" icon={<Icon d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10z" />} />
           <SidebarItem to="/app/reports" label="Reports" icon={<Icon d="M7 17V9m5 8V7m5 10v-6M5 21h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z" />} />
           <SidebarItem to="/app/documents" label="Documents" icon={<Icon d="M8 3h6l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5" />} />
-          <SidebarItem to="/app/settings" label="Settings" icon={<Icon d="M12 15.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7zM19.4 15a7.8 7.8 0 0 0 .1-1 7.8 7.8 0 0 0-.1-1l2-1.5-2-3.5-2.3.8a7.7 7.7 0 0 0-1.7-1l-.3-2.4H11l-.3 2.4a7.7 7.7 0 0 0-1.7 1L6.7 7l-2 3.5L6.7 12a7.8 7.8 0 0 0-.1 1 7.8 7.8 0 0 0 .1 1L4.7 16.5l2 3.5 2.3-.8c.5.4 1.1.7 1.7 1l.3 2.4h4l.3-2.4c.6-.3 1.2-.6 1.7-1l2.3.8 2-3.5L19.4 15z" />} />
+          {canSeeSettings ? (
+            <SidebarItem
+              to="/app/settings"
+              label="Settings"
+              icon={<Icon d="M12 15.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7zM19.4 15a7.8 7.8 0 0 0 .1-1 7.8 7.8 0 0 0-.1-1l2-1.5-2-3.5-2.3.8a7.7 7.7 0 0 0-1.7-1l-.3-2.4H11l-.3 2.4a7.7 7.7 0 0 0-1.7 1L6.7 7l-2 3.5L6.7 12a7.8 7.8 0 0 0-.1 1 7.8 7.8 0 0 0 .1 1L4.7 16.5l2 3.5 2.3-.8c.5.4 1.1.7 1.7 1l.3 2.4h4l.3-2.4c.6-.3 1.2-.6 1.7-1l2.3.8 2-3.5L19.4 15z" />}
+            />
+          ) : null}
         </nav>
 
         <div className="border-t border-slate-200 p-4 dark:border-slate-800">
